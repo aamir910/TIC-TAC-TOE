@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 
-function Square({value ,  onsqaureclick} )
+function Square({value ,  onsqaureclick } )
 {
  
   
@@ -15,7 +15,7 @@ if(!!value ) { // not undefined
   return(
     <>
 
-  <button className='squares'  style={styles}     onClick={onsqaureclick} > {value} </button>
+  <button className='squares'  style={styles}     onClick={onsqaureclick  } > {value} </button>
 
   </>
     )
@@ -25,9 +25,26 @@ if(!!value ) { // not undefined
     const [value1 , setvalue1] = useState (Array(9).fill(null))
     
     const [isX , setX] = useState (true)   ;
-  
+    const arraycopy = value1.slice()  ; 
+
 function HandleWinner()
 {
+    let index = 0 ;
+     console.log("aamir")
+     if
+     (arraycopy[index] == null)
+     {
+      return ; 
+     }       
+
+       let  i = index + 1 ;
+          if(       
+                arraycopy[index] === arraycopy[i]  && arraycopy[i] === arraycopy[i+1]  )
+          {
+            alert("the prayer wins is " + arraycopy[index] ) ; 
+            return ; 
+          }
+
   
     
 
@@ -36,12 +53,11 @@ function HandleWinner()
 
     function  handleclick(i)
     {
-
       if(value1[i]  )
       {
         return; 
       }
-      const arraycopy = value1.slice()  ; 
+      // const arraycopy = value1.slice()  ; 
 
       if (isX)
       {
@@ -59,6 +75,7 @@ function HandleWinner()
         setX(true);
       }
 
+  HandleWinner() ; 
     }
 
  return (
@@ -66,7 +83,7 @@ function HandleWinner()
          <div className = 'btn' >
            
 <div className='row '>
-          <Square  value = {value1[0]}  onsqaureclick =  {()=>handleclick(0)}/>
+          <Square  value = {value1[0]}  onsqaureclick =  {()=>handleclick(0) }   />
           <Square  value = {value1[1]}   onsqaureclick = {()=>handleclick(1)}  />
           <Square  value = {value1[2]}   onsqaureclick = {()=>handleclick(2)} />
       </div>
