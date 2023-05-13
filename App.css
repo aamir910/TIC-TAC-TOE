@@ -8,6 +8,8 @@ body
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url(dark-hexagonal-background-with-gradient-color_79603-1409.avif)
+  /* background-color: black; */
 }
 .game
 {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 
-function Square({value ,  onsqaureclick } )
+function Square({value ,  onsqaureclick   } )
 {
  
   
@@ -14,8 +14,8 @@ if(!!value ) { // not undefined
 
   return(
     <>
-
   <button className='squares'  style={styles}     onClick={onsqaureclick  } > {value} </button>
+
 
   </>
     )
@@ -27,33 +27,53 @@ if(!!value ) { // not undefined
     const [isX , setX] = useState (true)   ;
     const arraycopy = value1.slice()  ; 
 
-function HandleWinner()
-{
-    let index = 0 ;
-     console.log("aamir")
-     if
-     (arraycopy[index] == null)
-     {
-      return ; 
-     }       
+    let winner = handlewinning(value1) ; 
+  let status ; 
 
-       let  i = index + 1 ;
-          if(       
-                arraycopy[index] === arraycopy[i]  && arraycopy[i] === arraycopy[i+1]  )
-          {
-            alert("the prayer wins is " + arraycopy[index] ) ; 
-            return ; 
-          }
+if (winner)
+{
+    status = "winner is " +  winner ;  
+}
+else
+{
+        status = "next players move: " +  ( isX ? "X" : "O" )  ;
+}
+   
+    function handlewinning(value1)
+    {
+
+        let lines =[
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ]
+
+  for (let i = 0; i < lines.length; i++) {
+    let [a,b,c] = lines[i]  ; 
+   
+    if( value1[i] && value1[a] === value1[b]   && value1[a] === value1[c]) 
+    {
+      return value1[a]  ; 
+
+    }
+    
+  }
+  return null ; 
 
   
-    
+    }
 
 
-}
+
 
     function  handleclick(i)
     {
-      if(value1[i]  )
+      if(value1[i]  || handlewinning(value1)   )
       {
         return; 
       }
@@ -62,7 +82,7 @@ function HandleWinner()
       if (isX)
       {
         arraycopy[i] = "X"
-      
+        
 
         setvalue1(arraycopy)  ;  
         setX(false);
@@ -74,14 +94,14 @@ function HandleWinner()
         setvalue1(arraycopy)  ; 
         setX(true);
       }
-
-  HandleWinner() ; 
+ 
     }
 
  return (
       <div className="game">
          <div className = 'btn' >
-           
+              
+       <h1>{status} </h1>
 <div className='row '>
           <Square  value = {value1[0]}  onsqaureclick =  {()=>handleclick(0) }   />
           <Square  value = {value1[1]}   onsqaureclick = {()=>handleclick(1)}  />
